@@ -17,11 +17,6 @@
    ```sh
    lsblk
    ```
-- Mount the ISO file:
-   ```sh
-   sudo mkdir /mnt/create_usb
-   sudo mount -o loop ./ns8.iso /mnt/create_usb
-   ```
 - Write the ISO file to the USB drive:
    ```sh
    sudo dd if=./ns8.iso of=/dev/* bs=4M status=progress && sync
