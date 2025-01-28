@@ -7,7 +7,7 @@
    ```
 - Create the container that modifies the minimal ISO of Rocky Linux with the following command:
    ```sh
-   podman run --rm -it --privileged -v $(pwd):/root localhost/ns8-boxbuilder mkksiso --cmdline "inst.ks=https://raw.githubusercontent.com/tommaso-ascani/rocky-ns8/refs/heads/main/ks.cfg" <downloaded_image_name>.iso ns8.iso
+   podman run --rm -it --privileged -v $(pwd):/root localhost/ns8-boxbuilder mkksiso --cmdline "inst.ks=https://raw.githubusercontent.com/NethServer/ns8-rocky-iso/refs/heads/main/ks.cfg" <downloaded_image_name>.iso ns8.iso
    ```
    > **Note:** Replace `<downloaded_image_name>` with the name of the downloaded ISO image.
 
