@@ -27,7 +27,7 @@ jobs:
 
     - name: Create modified ISO
       run: |
-        podman run --rm -it --privileged -v $(pwd):/root localhost/ns8-boxbuilder mkksiso --cmdline "inst.ks=https://raw.githubusercontent.com/NethServer/ns8-rocky-iso/refs/heads/main/ks.cfg" rocky.iso ns8.iso
+        podman run --rm -it --privileged -v $(pwd):/root localhost/ns8-boxbuilder mkksiso -R "Rocky Linux" "NethServer 8 (Rocky Linux)" --cmdline "inst.ks=https://raw.githubusercontent.com/NethServer/ns8-rocky-iso/refs/heads/main/ks.cfg" rocky.iso ns8.iso
 
     # - name: Upload ISO artifact
     #   uses: actions/upload-artifact@v4
