@@ -14,11 +14,12 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Download Rocky Linux ISO
       run: |
         ROCKY_VERSION=${GITHUB_REF#refs/tags/rocky-}
+        echo "ROCKY_VERSION=${GITHUB_REF#refs/tags/rocky-}" >> $GITHUB_ENV
         wget -O rocky.iso https://download.rockylinux.org/pub/rocky/${ROCKY_VERSION}/isos/x86_64/Rocky-${ROCKY_VERSION}-x86_64-minimal.iso
 
     - name: Build container
@@ -27,31 +28,11 @@ jobs:
 
     - name: Create modified ISO
       run: |
-        podman run --rm -it --privileged -v $(pwd):/root localhost/ns8-boxbuilder mkksiso -R "Rocky Linux" "NethServer 8 (Rocky Linux)" --cmdline "inst.ks=https://raw.githubusercontent.com/NethServer/ns8-rocky-iso/refs/heads/main/ks.cfg" rocky.iso ns8.iso
+        podman run --rm -it --privileged -v $(pwd):/root localhost/ns8-boxbuilder mkksiso -R "Rocky Linux" "NethServer 8 (Rocky Linux)" --cmdline "inst.ks=https://raw.githubusercontent.com/NethServer/ns8-rocky-iso/refs/heads/main/ks.cfg" rocky.iso ns8-rocky-9.5-x86_64.iso
 
-    # - name: Upload ISO artifact
-    #   uses: actions/upload-artifact@v4
-    #   with:
-    #     name: ns8-iso
-    #     path: ns8.iso
-
-    - name: Create GitHub Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Create GitHub Release and Upload ISO
+      uses: softprops/action-gh-release@v1
       with:
         tag_name: ${{ github.ref }}
-        release_name: Rocky ${{ env.ROCKY_VERSION }}
-        draft: false
-        prerelease: false
-
-    - name: Upload ISO to Release
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ns8.iso
-        asset_name: ns8.iso
-        asset_content_type: application/octet-stream
+        name: Rocky Linux ${{ env.ROCKY_VERSION }} for NethServer 8
+        files: ns8-rocky-${{ env.ROCKY_VERSION }}-x86_64.iso
