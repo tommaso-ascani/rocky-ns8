@@ -30,11 +30,7 @@ This repository contains scripts and instructions for creating an ISO image of R
    ```sh
    sudo dd if=./ns8.iso of=/dev/sdc1 bs=4M oflag=direct status=progress
    ```
-   > **Note:** Replace `/dev/sdc1` with the correct USB drive identifier
-- Eject the USB drive:
-   ```sh
-   sudo eject /dev/sdc1
-   ```
+  **Note:** Replace `/dev/sdc1` with the correct USB drive identifier
 
 # Installation Process
 
@@ -52,9 +48,9 @@ This repository contains scripts and instructions for creating an ISO image of R
 
 4. **Network Configuration:**
    - The script will clean up existing network configurations and set a static IP address for the first network interface (192.168.1.1).
-   - To change the network configuration, use the `nmtui` tool:
+   - To change the network configuration, access the shell with `root` user and use the `nmtui` tool:
      ```sh
-     sudo nmtui
+     nmtui
      ```
    - Follow the prompts to edit the connection, set a new IP address, and save the changes.
 
@@ -72,7 +68,18 @@ This repository contains scripts and instructions for creating an ISO image of R
 
 # Default Configurations
 
-## Console
+- The system is paritioned with LVM
+- Timezone is set to Europe/Rome
+- Keyboard is set to Italian
+- System language is English
+- SSH access is allowed for root user with password
+
+After the first login remember to:
+
+- change all default password (see below)
+- configure NethVoice Proxy before the NethVoice module
+
+## Console/SSH
 - **User:** `root`
 - **Password:** `Nethesis,1234`
 
