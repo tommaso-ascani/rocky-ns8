@@ -74,7 +74,7 @@ This repository contains scripts and instructions for creating an ISO image of R
 - System language is English
 - SSH access is allowed for root user with password
 
-After the firs login remember to:
+After the first login remember to:
 
 - change all default password (see below)
 - configure NethVoice Proxy before the NethVoice module
