@@ -1,4 +1,4 @@
-This repository contains scripts and instructions for creating an ISO image of Rocky Linux modified for the installation of NethServer 8, which includes NethVoice. The goal of this repository is to provide an image that can be used for boxes, which will serve as the leader node of a cluster (ideally a single-node cluster).
+This repository contains scripts and instructions for creating an ISO image of Rocky Linux modified for the installation of NethServer 8, which includes NethVoice. The goal of this repository is to provide an image that can be used for appliances, which will serve as the leader node of a cluster (ideally a single-node cluster).
 
 # Pre-requisites
 
@@ -28,9 +28,9 @@ This repository contains scripts and instructions for creating an ISO image of R
    ```
 - Write the ISO file to the USB drive:
    ```sh
-   sudo dd if=./ns8.iso of=/dev/sdc1 bs=4M oflag=direct status=progress
+   sudo dd if=./ns8.iso of=/dev/sdc bs=4M oflag=direct status=progress
    ```
-  **Note:** Replace `/dev/sdc1` with the correct USB drive identifier
+  **Note:** Replace `/dev/sdc` with the correct USB drive identifier
 
 # Installation Process
 
@@ -76,7 +76,7 @@ This repository contains scripts and instructions for creating an ISO image of R
 
 After the first login remember to:
 
-- change all default password (see below)
+- change all default passwords (see below)
 - configure NethVoice Proxy before the NethVoice module
 
 ## Console/SSH
