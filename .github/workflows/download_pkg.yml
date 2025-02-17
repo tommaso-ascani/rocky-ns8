@@ -1,0 +1,33 @@
+name: Download Packages
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  download-packages:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y dnf podman python3-pip curl jq
+
+    - name: Run download_pkg.sh script
+      run: |
+        chmod +x /home/tommaso/Documents/git/ns8-rocky-iso/download_pkg.sh
+        /home/tommaso/Documents/git/ns8-rocky-iso/download_pkg.sh
